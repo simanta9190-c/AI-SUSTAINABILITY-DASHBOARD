@@ -1,0 +1,411 @@
+:root {
+    /* Color Palette - Power BI / Microsoft Native Theme */
+    --bg-base: #F3F2F1; /* Standard Microsoft Light Gray */
+    --bg-surface: #FFFFFF; /* High contrast White */
+    --bg-panel: #FAF9F8; 
+    
+    --primary-ms: #0078D4; /* Azure/Windows Blue */
+    --primary-pbi: #F2C811; /* Power BI Yellow */
+    --accent-teal: #008272; /* Excel Green */
+    --accent-purple: #8661C5; /* Teams Purple */
+    
+    --text-main: #323130; /* Near black */
+    --text-muted: #605E5C; /* Medium gray */
+    
+    --success: #107C10; /* MS Success */
+    --danger: #D83B01; /* MS Error */
+    --warning: #F59E0B; /* Standard Warning */
+    
+    --border-light: #EDEBE9; /* Soft border */
+    --border-highlight: #C8C6C4;
+    
+    --shadow-base: 0 1.6px 3.6px 0 rgba(0,0,0,0.132), 0 0.3px 0.9px 0 rgba(0,0,0,0.108);
+    --shadow-accent: 0 4px 8px rgba(0,0,0,0.1);
+
+    --font-heading: 'Segoe UI', "Inter", sans-serif;
+    --font-body: 'Segoe UI', "Inter", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-highlight) var(--bg-base);
+}
+
+body {
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Microsoft Fluent Design Panels */
+.glass-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: 4px; /* Native squareness */
+    box-shadow: var(--shadow-base);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.glass-panel:hover {
+    box-shadow: var(--shadow-accent);
+}
+
+/* Base Buttons */
+.btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 2px; /* Square edges */
+    border: none;
+    padding: 6px 16px;
+    font-size: 13px;
+}
+
+.primary-btn {
+    background: var(--primary-ms);
+    color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 120, 212, 0.2);
+}
+.primary-btn:hover {
+    background: #005A9E;
+    box-shadow: 0 4px 8px rgba(0, 120, 212, 0.3);
+}
+
+.toggle-btn {
+    background: var(--bg-surface);
+    border: 1px solid #8A8886;
+    color: var(--text-main);
+    padding: 4px 12px;
+}
+.toggle-btn:hover {
+    background: var(--bg-panel);
+}
+.toggle-btn.active {
+    background: var(--primary-ms);
+    border-color: var(--primary-ms);
+    color: #fff;
+}
+
+.mt-4 { margin-top: 1rem; }
+.mb-4 { margin-bottom: 2rem; }
+.mt-auto { margin-top: auto; }
+
+/* Layout */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 260px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--bg-surface); 
+    border-right: 1px solid var(--border-light);
+    border-radius: 0; 
+    box-shadow: none;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.brand h2 {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--text-main);
+}
+
+.brand-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: -1rem;
+    padding-left: 0.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background 0.15s ease;
+}
+
+.nav-links li a i {
+    width: 20px;
+    font-size: 16px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.nav-links li a:hover {
+    background: var(--bg-base);
+}
+
+.nav-links li.active a {
+    background: var(--bg-panel);
+    font-weight: 600;
+    position: relative;
+}
+
+.nav-links li.active a::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    border-radius: 2px;
+    background: var(--primary-ms);
+}
+
+.nav-links li.active a i {
+    color: var(--primary-ms);
+}
+
+/* Main Content Area */
+.content {
+    flex: 1;
+    padding: 1.5rem 2rem;
+    max-width: 1500px;
+}
+
+.topbar {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+.topbar .subtitle {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 13px;
+}
+
+/* Live Tracker Header */
+.live-tracker {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+    border-left: 4px solid var(--primary-pbi);
+    margin-bottom: 1.5rem;
+}
+
+.live-header {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary-pbi);
+    animation: blink 2s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.live-counter {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text-main);
+    line-height: 1;
+}
+
+.live-counter .unit {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.live-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+/* KPI Dashboard Grid */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.kpi-accent {
+    border-top: 3px solid var(--primary-ms);
+}
+
+.kpi-title {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.kpi-value {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-main);
+    margin: 4px 0;
+}
+
+.kpi-trend {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.kpi-trend.good { color: var(--success); }
+.kpi-trend.bad { color: var(--danger); }
+
+/* Charts Area Wrapper */
+.charts-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+}
+
+.info-badge {
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.span-full {
+    grid-column: 1 / -1;
+}
+
+.chart-card {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 8px;
+}
+
+.card-header h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: var(--text-main);
+}
+
+.card-desc {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+#energy-matrix-header h3 {
+    color: var(--primary-pbi);
+}
+
+.scenario-toggles {
+    display: flex;
+    gap: 4px;
+}
+
+.chart-container {
+    position: relative;
+    height: 320px;
+    width: 100%;
+}
+
+/* Overriding Leaflet to Light Theme */
+.leaflet-container {
+    background: #EAEAEA !important;
+    font-family: var(--font-body) !important;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: var(--bg-surface) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border-light);
+    border-radius: 2px;
+}
+
+/* Tabbed Areas */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .charts-wrapper { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .app-container { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; gap: 0.5rem; padding: 1rem; border-right: none; border-bottom: 1px solid var(--border-light); }
+    .nav-links { flex-direction: row; flex-wrap: wrap; }
+    .kpi-grid { grid-template-columns: 1fr; }
+    .content { padding: 1rem; }
+}

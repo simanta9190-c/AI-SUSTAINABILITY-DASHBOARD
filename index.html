@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Analytics | Data Insight Enterprise</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="style.css?v=4.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <nav class="sidebar">
+            <div class="brand">
+                <i class="fas fa-chart-column" style="font-size: 28px; color: var(--primary-pbi);"></i>
+                <h2>Nexus Analytics</h2>
+            </div>
+            <div class="brand-subtitle">AI Intelligence Hub</div>
+            
+            <ul class="nav-links mt-4">
+                <li class="active" data-target="tab-summary"><a href="#"><i class="fas fa-home"></i> Executive Summary</a></li>
+                <li data-target="tab-compute"><a href="#"><i class="fas fa-server"></i> Node Compute Metrics</a></li>
+                <li data-target="tab-adoption"><a href="#"><i class="fas fa-user-group"></i> Active Population</a></li>
+                <li data-target="tab-maps"><a href="#"><i class="fas fa-earth-americas"></i> Map Diagnostics</a></li>
+            </ul>
+            <button id="btn-simulate" class="btn primary-btn mt-auto" style="margin-bottom: 10px;">Refresh PowerBI Dataset</button>
+        </nav>
+
+        <main class="content">
+            <header class="topbar">
+                <h1>Global Insight Synthesis Dashboard</h1>
+                <p class="subtitle">Cloud Capacity, Application Usage, and Infrastructure Analytics Workspace</p>
+            </header>
+
+            <!-- TAB 1: EXECUTIVE SUMMARY -->
+            <section id="tab-summary" class="tab-content active">
+                <section class="live-tracker glass-panel mb-4">
+                    <div class="live-header">
+                        <span class="live-dot"></span> LIVE: Incoming API Trajectory
+                    </div>
+                    <div class="live-counter">
+                        <span id="tracker-val">Loading...</span> <span class="unit">Requests / sec</span>
+                    </div>
+                    <div class="live-sub">Metrics gathered securely via Microsoft Azure ingress logic.</div>
+                </section>
+
+                <section class="kpi-grid">
+                    <div class="kpi-card glass-panel" id="card-co2">
+                        <div class="kpi-title">Data Ingestion (Monthly)</div>
+                        <div class="kpi-value"><span id="val-co2">--</span> TB</div>
+                        <div class="kpi-trend bad" id="trend-co2">--</div>
+                    </div>
+                    <div class="kpi-card glass-panel" id="card-renew">
+                        <div class="kpi-title">AI Integrity Score</div>
+                        <div class="kpi-value"><span id="val-renew">--</span> %</div>
+                        <div class="kpi-trend good" id="trend-renew">--</div>
+                    </div>
+                    <div class="kpi-card glass-panel kpi-accent">
+                        <div class="kpi-title">Projected Overhead Ceiling</div>
+                        <div class="kpi-value"><span id="val-pred">--</span> TB</div>
+                        <div class="kpi-trend" id="trend-pred">Calculated Future Allowance</div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- TAB 2: NODE COMPUTE & METRICS -->
+            <section id="tab-compute" class="tab-content">
+                <section class="charts-wrapper mb-4" id="decoupling">
+                    <div class="chart-card glass-panel">
+                        <div class="card-header" id="energy-matrix-header">
+                            <h3>Regional Load Breakdown (Polar Area)</h3>
+                            <p class="card-desc">Comparative analysis of active query requests by physical region.</p>
+                        </div>
+                        <div class="chart-container" style="height: 300px;">
+                             <canvas id="polarAreaChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-panel">
+                        <div class="card-header">
+                            <h3>Cloud Processing Efficiencies (Bubble Scatter)</h3>
+                            <p class="card-desc">Mapping Cost ($k) vs Payload (TB). Bubble size represents request latency.</p>
+                        </div>
+                        <div class="chart-container" style="height: 300px;">
+                             <canvas id="bubbleChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="charts-wrapper mb-4" id="advanced-analytics">
+                    <div class="chart-card glass-panel span-full">
+                        <div class="card-header">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <h3>Platform Competency Index (Radar Matrix)</h3>
+                                <div class="info-badge">Secure View</div>
+                            </div>
+                            <p class="card-desc">Multi-axial representation of AI Confidence, Speed, Security, and Scalability over 6 systems.</p>
+                        </div>
+                        <div class="chart-container" style="height: 400px; display:flex; justify-content:center;">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- TAB 3: ACTIVE POPULATION -->
+            <section id="tab-adoption" class="tab-content">
+                <section class="charts-wrapper mb-4" id="demographics">
+                    <div class="chart-card glass-panel">
+                        <div class="card-header">
+                            <h3>Geographic User Adoption (Stacked Bar)</h3>
+                            <p class="card-desc">Tracking registered user segments cumulatively.</p>
+                        </div>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="stackedBarChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card glass-panel">
+                        <div class="card-header">
+                            <h3>Revenue & Utilization (Mixed Overlay)</h3>
+                            <p class="card-desc">Bar representing active load, overlayed Line tracking generated revenue limits.</p>
+                        </div>
+                        <div class="chart-container" style="height: 300px;">
+                            <canvas id="mixedChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- TAB 4: MAPS -->
+            <section id="tab-maps" class="tab-content">
+                <section class="map-wrapper mb-4" id="trace-maps">
+                    <div class="charts-wrapper">
+                        <div class="chart-card glass-panel">
+                            <div class="card-header">
+                                <h3>Global Edge Node Tracker</h3>
+                                <p class="card-desc">Mapping diagnostic endpoints worldwide.</p>
+                            </div>
+                            <div id="globalMapObj" style="height: 350px; width: 100%; border-radius: 4px;"></div>
+                        </div>
+                        <div class="chart-card glass-panel">
+                            <div class="card-header">
+                                <h3>Diagnostic Regional Edge: Subcontinent</h3>
+                                <p class="card-desc">Detailed cluster tracking for high-latency sectors.</p>
+                            </div>
+                            <div id="indiaMapObj" style="height: 350px; width: 100%; border-radius: 4px;"></div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js?v=4.0"></script>
+</body>
+</html>
